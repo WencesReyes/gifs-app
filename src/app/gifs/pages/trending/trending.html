@@ -1,3 +1,15 @@
-<section class="py-3">
-  <gif-list [gifs]="gifService.trandingGifs()" />
-</section>
+<div
+  class="h-screen grid overflow-y-scroll grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-3"
+  (scroll)="onScroll()"
+  #gifGrid
+>
+  @for (group of gifService.gifGroups(); track $index) {
+    <div class="grid gap-4">
+      @for (gif of group; track gif.id) {
+        <div>
+          <img class="h-full w-full rounded-base object-cover" [src]="gif.url" [alt]="gif.title" />
+        </div>
+      }
+    </div>
+  }
+</div>
